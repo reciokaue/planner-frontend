@@ -11,8 +11,11 @@ import {
   X,
 } from 'lucide-react'
 import { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-function App() {
+export function CreateTripPage() {
+  const navigate = useNavigate()
+
   const [isGuestInputOpen, setIsGuestInputOpen] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
@@ -65,6 +68,10 @@ function App() {
     setEmailsToInvite(newEmailList)
   }
 
+  function createTrip() {
+    navigate('/trip/123')
+  }
+
   return (
     <div className="flex h-screen items-center justify-center bg-pattern bg-center bg-no-repeat">
       <div className="flex w-full max-w-3xl flex-col items-center px-6 text-center">
@@ -97,7 +104,10 @@ function App() {
             <div className="h-6 w-px bg-zinc-800" />
 
             {isGuestInputOpen ? (
-              <button className="flex items-center gap-2 rounded-lg bg-zinc-800 px-5 py-2 font-medium text-zinc-200 hover:bg-zinc-700">
+              <button
+                onClick={closeGuestsInput}
+                className="flex items-center gap-2 rounded-lg bg-zinc-800 px-5 py-2 font-medium text-zinc-200 hover:bg-zinc-700"
+              >
                 Alterar local/data
                 <Settings2 className="size-5" />
               </button>
@@ -253,6 +263,7 @@ function App() {
                 </div>
               </div>
               <button
+                onClick={createTrip}
                 type="submit"
                 className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-lime-300 px-5 py-2 font-medium text-lime-950 hover:bg-lime-400"
               >
@@ -265,5 +276,3 @@ function App() {
     </div>
   )
 }
-
-export default App
