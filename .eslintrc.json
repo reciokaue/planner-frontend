@@ -1,7 +1,7 @@
 //.eslintrc.json
 {
   "extends":"@rocketseat/eslint-config/react",
-  "plugins": [],
+  "plugins": ["simple-import-sort"],
   "rules": {
     "simple-import-sort/imports": "error",
     "camelcase": "off",
