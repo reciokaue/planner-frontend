@@ -1,4 +1,8 @@
-import { ArrowRight, Calendar, MapPin, Settings2 } from 'lucide-react'
+import { ArrowRight, MapPin, Settings2 } from 'lucide-react'
+import { useState } from 'react'
+import { DateRange } from 'react-day-picker'
+
+import { DateRangePicker } from '@/components/ui/date-range-picker'
 
 import { Button } from '../../../components/button'
 
@@ -13,8 +17,10 @@ export function DestinationAndDate({
   isGuestInputOpen,
   openGuestsInput,
 }: DestinationAndDateProps) {
+  const [date, setDate] = useState<DateRange | undefined>()
+
   return (
-    <div className="flex h-16 items-center gap-3 rounded-s-xl bg-zinc-900 px-4 shadow-shape">
+    <div className="shadow-shape flex h-16 items-center gap-3 rounded-s-xl bg-zinc-900 px-4">
       <div className="flex flex-1 items-center gap-2">
         <MapPin className="size-5 text-zinc-400" />
         <input
@@ -25,13 +31,7 @@ export function DestinationAndDate({
         />
       </div>
       <div className="flex items-center gap-2">
-        <Calendar className="size-5 text-zinc-400" />
-        <input
-          disabled={isGuestInputOpen}
-          className="text-large w-36 bg-transparent placeholder-zinc-400 outline-none"
-          type="text"
-          placeholder="Quando?"
-        />
+        <DateRangePicker setDate={setDate} date={date} />
       </div>
 
       <div className="h-6 w-px bg-zinc-800" />
