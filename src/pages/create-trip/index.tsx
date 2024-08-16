@@ -1,5 +1,6 @@
-import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+
+import { useTrip } from '@/contexts/trip'
 
 import { ConfirmTripModal } from './confirm-trip-modal'
 import { InviteGuestsModal } from './invite-guests-modal'
@@ -7,24 +8,23 @@ import { DestinationAndDate } from './steps/destination-and-date'
 import { InviteGuestsStep } from './steps/invite-guests-step'
 
 export function CreateTripPage() {
-  const navigate = useNavigate()
-
+  const [isGuestInputOpen, setIsGuestInputOpen] = useState(false)
   const [isGuestsModalOpen, setIsGuestsModalOpen] = useState(false)
   const [isConfirmTripModalOpen, setIsConfirmTripModalOpen] = useState(false)
 
-  const [isGuestInputOpen, setIsGuestInputOpen] = useState(false)
-  const [emailsToInvite, setEmailsToInvite] = useState([
-    'kaue.recio2@gmail.com',
-  ])
+  const {
+    addNewEmailToInvite,
+    createTrip,
+    removeEmailFromInvites,
+    emailsToInvite,
+  } = useTrip()
 
   function openGuestsInput() {
     setIsGuestInputOpen(true)
   }
-
   function closeGuestsInput() {
     setIsGuestInputOpen(false)
   }
-
   function openGuestsModal() {
     setIsGuestsModalOpen(true)
   }
@@ -38,38 +38,8 @@ export function CreateTripPage() {
     setIsConfirmTripModalOpen(false)
   }
 
-  function addNewEmailToInvite(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    const data = new FormData(event.currentTarget)
-    const email = data.get('email')?.toString()
-
-    if (!email) return
-
-    if (emailsToInvite.includes(email)) {
-      event.currentTarget.reset()
-      return
-    }
-
-    setEmailsToInvite([...emailsToInvite, email])
-    event.currentTarget.reset()
-  }
-
-  function removeEmailFromInvites(emailToRemove: string) {
-    const newEmailList = emailsToInvite.filter(
-      (email) => email !== emailToRemove,
-    )
-    setEmailsToInvite(newEmailList)
-  }
-
-  function createTrip(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault()
-
-    navigate('/trip/123')
-  }
-
   return (
-    <div className="flex h-screen items-center justify-center bg-pattern bg-center bg-no-repeat">
+    <div className="bg-pattern flex h-screen items-center justify-center bg-center bg-no-repeat">
       <div className="flex w-full max-w-3xl flex-col items-center px-6 text-center">
         <img src="/logo.svg" alt="plann.er" />
         <p className="mt-3 text-lg text-zinc-300">

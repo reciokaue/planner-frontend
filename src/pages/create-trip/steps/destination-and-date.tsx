@@ -1,8 +1,7 @@
 import { ArrowRight, MapPin, Settings2 } from 'lucide-react'
-import { useState } from 'react'
-import { DateRange } from 'react-day-picker'
 
 import { DateRangePicker } from '@/components/ui/date-range-picker'
+import { useTrip } from '@/contexts/trip'
 
 import { Button } from '../../../components/button'
 
@@ -17,7 +16,7 @@ export function DestinationAndDate({
   isGuestInputOpen,
   openGuestsInput,
 }: DestinationAndDateProps) {
-  const [date, setDate] = useState<DateRange | undefined>()
+  const { dates, setDates, destination, setDestination } = useTrip()
 
   return (
     <div className="shadow-shape flex h-16 items-center gap-3 rounded-s-xl bg-zinc-900 px-4">
@@ -28,10 +27,12 @@ export function DestinationAndDate({
           className="text-large flex-1 bg-transparent placeholder-zinc-400 outline-none"
           type="text"
           placeholder="Para onde você vai?"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
         />
       </div>
       <div className="flex items-center gap-2">
-        <DateRangePicker setDate={setDate} date={date} />
+        <DateRangePicker setDate={setDates} date={dates} />
       </div>
 
       <div className="h-6 w-px bg-zinc-800" />
