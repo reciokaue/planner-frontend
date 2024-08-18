@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import { addActivity } from '@/api/add-activity'
 import { getTrip } from '@/api/get-trip'
 import { DatePicker } from '@/components/ui/date-picker'
-import { Skeleton } from '@/components/ui/skeleton'
+import { TimePicker } from '@/components/ui/time-picker'
 
 import { Button } from '../../components/button'
 
@@ -65,30 +65,27 @@ export function CreateActivityModal({
         </p>
         <form onSubmit={createNewActivity}>
           <div className="mb-3 flex flex-col gap-2">
-            {trip ? (
-              <>
-                <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
-                  <Tag className="ml-2 size-5 text-zinc-400" />
-                  <input
-                    className="text-large flex-1 bg-transparent placeholder-zinc-400 outline-none"
-                    placeholder="Qual a atividade?"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                  />
-                </div>
+            <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
+              <Tag className="ml-2 size-5 text-zinc-400" />
+              <input
+                className="text-large flex-1 bg-transparent placeholder-zinc-400 outline-none"
+                placeholder="Qual a atividade?"
+                value={title}
+                required
+                onChange={(e) => setTitle(e.target.value)}
+              />
+            </div>
+            <div className="flex gap-2">
+              {trip && (
                 <DatePicker
                   setDate={setDate}
                   date={date}
                   from={new Date(trip?.starts_at)}
                   to={new Date(trip?.ends_at)}
                 />
-              </>
-            ) : (
-              <>
-                <Skeleton className="h-14 w-full" />
-                <Skeleton className="h-14 w-full" />
-              </>
-            )}
+              )}
+              <TimePicker date={date || new Date()} setDate={setDate} />
+            </div>
           </div>
           <Button
             variant="primary"

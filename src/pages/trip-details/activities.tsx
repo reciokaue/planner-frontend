@@ -45,7 +45,7 @@ export function Activities() {
                     <CircleCheck className="size-5 text-lime-300" />
                     <span className="text-zinc-100">{activity.title}</span>
                     <span className="ml-auto text-sm text-zinc-400">
-                      {activity.title}
+                      {format(new Date(activity.occurs_at), 'HH:mm')}
                     </span>
                   </div>
                 ))
