@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import { Link2, Plus } from 'lucide-react'
+import { Link2 } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 
 import { getLinks } from '@/api/get-links'
 import { Skeleton } from '@/components/ui/skeleton'
 
-import { Button } from '../../components/button'
+import { NewLinkButtonModal } from './new-link-button-modal'
 
 export function ImportantLinks() {
   const { tripId } = useParams()
@@ -42,10 +42,7 @@ export function ImportantLinks() {
           : [1, 2].map((i) => <Skeleton key={i} className="h-11 w-full" />)}
       </div>
 
-      <Button variant="secondary">
-        <Plus className="size-5" />
-        Cadastrar novo link
-      </Button>
+      <NewLinkButtonModal />
     </header>
   )
 }

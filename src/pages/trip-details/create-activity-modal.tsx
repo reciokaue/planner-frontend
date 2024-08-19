@@ -1,22 +1,21 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { Tag, X } from 'lucide-react'
+import { Plus, Tag } from 'lucide-react'
 import { FormEvent, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { addActivity } from '@/api/add-activity'
 import { getTrip } from '@/api/get-trip'
+import { Button } from '@/components/ui/button'
 import { DatePicker } from '@/components/ui/date-picker'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { TimePicker } from '@/components/ui/time-picker'
 
-import { Button } from '../../components/button'
-
-interface CreateActivityModalProps {
-  closeActivityModal: () => void
-}
-
-export function CreateActivityModal({
-  closeActivityModal,
-}: CreateActivityModalProps) {
+export function CreateActivityButton() {
   const [title, setTitle] = useState('')
   const [date, setDate] = useState<Date | undefined>()
 
@@ -52,17 +51,20 @@ export function CreateActivityModal({
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/60">
-      <div className="shadow-shape z-10 w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
-        <div className="flex items-center justify-between">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="primary">
+          <Plus className="size-5" />
+          Cadastrar atividade
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
+        <DialogHeader className="flex justify-between">
           <h2 className="text-lg font-semibold">Cadastrar atividade</h2>
-          <button onClick={closeActivityModal}>
-            <X className="size-5 text-zinc-400" />
-          </button>
-        </div>
-        <p className="text-sm text-zinc-400">
-          Todos convidados podem visualizar as atividades.
-        </p>
+          <p className="text-sm text-zinc-400">
+            Todos convidados podem visualizar as atividades.
+          </p>
+        </DialogHeader>
         <form onSubmit={createNewActivity}>
           <div className="mb-3 flex flex-col gap-2">
             <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
@@ -96,7 +98,7 @@ export function CreateActivityModal({
             Salvar atividade
           </Button>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

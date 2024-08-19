@@ -3,7 +3,7 @@ import { ArrowRight, MapPin, Settings2 } from 'lucide-react'
 import { DateRangePicker } from '@/components/ui/date-range-picker'
 import { useTrip } from '@/contexts/trip'
 
-import { Button } from '../../../components/button'
+import { Button } from '@/components/ui/button'
 
 interface DestinationAndDateProps {
   isGuestInputOpen: boolean

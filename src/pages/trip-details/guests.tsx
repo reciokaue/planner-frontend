@@ -3,9 +3,8 @@ import { CircleCheck, CircleDashed, UserCog } from 'lucide-react'
 import { useParams } from 'react-router-dom'
 
 import { getTripParticipants } from '@/api/get-trip-participants'
+import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-
-import { Button } from '../../components/button'
 
 export function Guests() {
   const { tripId } = useParams()

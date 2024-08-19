@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom'
 
 import { getTrip } from '@/api/get-trip'
 
-import { Button } from '../../components/button'
+import { Button } from '@/components/ui/button'
 
 export function Header() {
   const { tripId } = useParams()

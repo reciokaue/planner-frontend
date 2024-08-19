@@ -3,7 +3,7 @@ import { FormEvent } from 'react'
 
 import { useTrip } from '@/contexts/trip'
 
-import { Button } from '../../components/button'
+import { Button } from '@/components/ui/button'
 
 interface ConfirmTripModalProps {
   closeModal: () => void

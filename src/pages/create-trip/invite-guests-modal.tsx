@@ -1,7 +1,7 @@
 import { AtSign, Plus, X } from 'lucide-react'
 import { FormEvent } from 'react'
 
-import { Button } from '../../components/button'
+import { Button } from '@/components/ui/button'
 
 interface InviteGuestsModalProps {
   closeModal: () => void
@@ -18,7 +18,7 @@ export function InviteGuestsModal({
 }: InviteGuestsModalProps) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/60">
-      <div className="w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5 shadow-shape">
+      <div className="shadow-shape w-[640px] space-y-5 rounded-xl bg-zinc-900 px-6 py-5">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-semibold">Selecionar convidados</h2>
           <button onClick={closeModal}>
